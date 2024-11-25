@@ -40,3 +40,25 @@
 body *{
   font-family: 'Roboto', 'sans-serif';
 }
+
+.App {
+  height: calc(100vh - 84px);
+}
+
+.bodyApp {
+  display: flex;
+  justify-content: center; /* Centrar horizontalmente */
+  align-items: center; /* Centrar verticalmente */
+  height: 100%; /* Altura completa de la ventana */
+  background-color: transparent; /* Opcional, para dar contraste */
+}
+
+.recuadroSearch{
+  background-color: white;
+  box-shadow: 0px 10px 20px #00000029;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+

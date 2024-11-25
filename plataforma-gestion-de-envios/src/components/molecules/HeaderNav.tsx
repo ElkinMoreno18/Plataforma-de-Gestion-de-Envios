@@ -12,6 +12,13 @@ import RandomUser from '../atoms/RandomUser';
 const HeaderNav = () => {
 
     const [showUsers, setShowUsers] = useState(true);
+    const [guideData, setGuideData] = useState(null);
+  
+    const handleSaveGuideData = (data: any) => {
+      setGuideData(data);
+      console.log("Información guardada:", data);
+    };
+
 
   return (
     <header style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '10px 20px', backgroundColor: '#FFFFFF', boxShadow: '0px 3px 6px #00000029', minHeight: '64px' }}>
@@ -25,7 +32,7 @@ const HeaderNav = () => {
 
       <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
       <RandomUser isVisible={showUsers} />
-      <SearchBar onToggleUsers={(isVisible) => setShowUsers(isVisible)}/>
+      <SearchBar onSaveGuideData={handleSaveGuideData} onToggleUsers={(isVisible) => setShowUsers(isVisible)}/>
       <AppBarMenu />
       </div>
       
