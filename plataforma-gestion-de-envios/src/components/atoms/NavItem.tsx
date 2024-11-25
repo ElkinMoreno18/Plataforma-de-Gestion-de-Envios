@@ -10,8 +10,8 @@ interface NavItemProps {
 
 const NavItem: React.FC<NavItemProps> = ({ label, link, icon: Icon }) => {
     return (
-      <a href={link} style={{ margin: '0 15px', textDecoration: 'none', color: 'black' }} >
-           <IconButton style={{ marginRight: '8px' }}>
+      <a href={link} style={{ fontSize: '12px', fontFamily:'Roboto', fontWeight: '500', textDecoration: 'none', color: '#00000099', display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', rowGap: '11px' }} >
+      <IconButton >
         <Icon />
       </IconButton>
         {label}

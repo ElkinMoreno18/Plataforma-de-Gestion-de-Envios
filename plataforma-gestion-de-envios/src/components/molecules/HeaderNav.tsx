@@ -1,7 +1,6 @@
 // src/components/molecules/HeaderNav.tsx
 import React, { useState, useEffect } from 'react';
 import Logo from '../atoms/logo';
-import axios from 'axios';
 import SearchBar from '../atoms/SearchBar';
 import NavItem from '../atoms/NavItem';
 import { Typography, Button, IconButton, Menu, MenuItem } from '@mui/material';
@@ -11,8 +10,11 @@ import RandomUser from '../atoms/RandomUser';
 
 
 const HeaderNav = () => {
+
+    const [showUsers, setShowUsers] = useState(true);
+
   return (
-    <header style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '10px 20px', backgroundColor: '#FFFFFF', boxShadow: '0px 3px 6px #00000029' }}>
+    <header style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '10px 20px', backgroundColor: '#FFFFFF', boxShadow: '0px 3px 6px #00000029', minHeight: '64px' }}>
       <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'flex-end'}}>
         <NavItem label="" link="#" icon={MenuOutlinedIcon} />
       <Logo />
@@ -20,8 +22,10 @@ const HeaderNav = () => {
         Tracking
       </Typography>
       </div>
-      <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'flex-end'}}>
-      <RandomUser />
+
+      <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
+      <RandomUser isVisible={showUsers} />
+      <SearchBar onToggleUsers={(isVisible) => setShowUsers(isVisible)}/>
       <AppBarMenu />
       </div>
       

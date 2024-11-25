@@ -1,5 +1,5 @@
 import React, { useState, MouseEvent } from 'react';
-import { IconButton, Menu, MenuItem } from '@mui/material';
+import { IconButton, Menu, Grid } from '@mui/material';
 import AppsOutlinedIcon from '@mui/icons-material/AppsOutlined';
 import AssignmentReturnOutlinedIcon from '@mui/icons-material/AssignmentReturnOutlined';
 import MergeTypeOutlinedIcon from '@mui/icons-material/MergeTypeOutlined';
@@ -16,46 +16,70 @@ const AppBarMenu = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
   const handleClick = (event: MouseEvent<HTMLElement>) => {
-    setAnchorEl(event.currentTarget); // Abre el menú
+    setAnchorEl(event.currentTarget); 
   };
 
   const handleClose = () => {
-    setAnchorEl(null); // Cierra el menú
+    setAnchorEl(null); 
   };
 
   return (
     <div>
-      {/* IconButton que despliega el menú */}
       <IconButton onClick={handleClick} color="inherit">
         <AppsOutlinedIcon />
       </IconButton>
 
-      {/* El menú se despliega debajo del IconButton */}
       <Menu
         anchorEl={anchorEl}
         open={Boolean(anchorEl)}
         onClose={handleClose}
         anchorOrigin={{
-          vertical: 'bottom', // Posición vertical del menú
-          horizontal: 'left', // Posición horizontal del menú
+          vertical: 'bottom', 
+          horizontal: 'left', 
         }}
         transformOrigin={{
           vertical: 'top',
           horizontal: 'left',
         }}
+        PaperProps={{
+          sx: { marginTop: '25px', padding: '30px', width: '328px', height: '415px',  backgroundColor: '#FFF', boxShadow: '0px 19px 38px #00000029', borderRadius: '4px' }, // Ajusta tamaño del menú
+        }}
       >
-        {/* Aquí se añaden los NavItem */}
-        <NavItem label="Hub" link="/" icon={AssignmentReturnOutlinedIcon} />
-        <NavItem label="Etiqueta consolidadora" link="/" icon={MergeTypeOutlinedIcon} />
-        <NavItem label="Control de muelles" link="/" icon={SwapVertOutlinedIcon} />
-        <NavItem label="Inconsistencias Checkpoint" link="/" icon={AnnouncementOutlinedIcon} />
-        <NavItem label="Guías en proceso" link="/" icon={AnnouncementOutlinedIcon} />
-        <NavItem label="Recogida" link="/" icon={AnnouncementOutlinedIcon} />
-        <NavItem label="Reparto" link="/" icon={AnnouncementOutlinedIcon} />
-        <NavItem label="NyS" link="/" icon={FindInPageOutlinedIcon} />
-        <NavItem label="Configuración" link="/" icon={SettingsOutlinedIcon} />
-        <NavItem label="Tracking" link="/" icon={ManageSearchOutlinedIcon} />
-        <NavItem label="Acuerdos" link="/" icon={HandshakeOutlinedIcon} />
+        <Grid container spacing={2} sx={{ height: '415px'}}>
+          <Grid item xs={4}>
+            <NavItem label="Hub" link="/" icon={AssignmentReturnOutlinedIcon} />
+          </Grid>
+          <Grid item xs={4}>
+            <NavItem label="Etiqueta consolidadora" link="/" icon={MergeTypeOutlinedIcon} />
+          </Grid>
+          <Grid item xs={4}>
+            <NavItem label="Control de muelles" link="/" icon={SwapVertOutlinedIcon} />
+          </Grid>
+          <Grid item xs={4}>
+            <NavItem label="Inconsistencias Checkpoint" link="/" icon={AnnouncementOutlinedIcon} />
+          </Grid>
+          <Grid item xs={4}>
+            <NavItem label="Guías en proceso" link="/" icon={AnnouncementOutlinedIcon} />
+          </Grid>
+          <Grid item xs={4}>
+            <NavItem label="Recogida" link="/" icon={AnnouncementOutlinedIcon} />
+          </Grid>
+          <Grid item xs={4}>
+            <NavItem label="Reparto" link="/" icon={AnnouncementOutlinedIcon} />
+          </Grid>
+          <Grid item xs={4}>
+            <NavItem label="NyS" link="/" icon={FindInPageOutlinedIcon} />
+          </Grid>
+          <Grid item xs={4}>
+            <NavItem label="Configuración" link="/" icon={SettingsOutlinedIcon} />
+          </Grid>
+          <Grid item xs={4}>
+            <NavItem label="Tracking" link="/" icon={ManageSearchOutlinedIcon} />
+          </Grid>
+          <Grid item xs={4}>
+            <NavItem label="Acuerdos" link="/" icon={HandshakeOutlinedIcon} />
+          </Grid>
+        </Grid>
       </Menu>
     </div>
   );
