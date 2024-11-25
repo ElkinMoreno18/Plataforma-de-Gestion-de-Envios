@@ -6,7 +6,7 @@ import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import BarcodeIcon from "../../assets/icons/barcodeScanner.svg";
 
 interface SearchPanelProps {
-  onSearchGuide: (guideNumbers: string[]) => void; 
+  onSearchGuide: (guideNumbers: string[]) => void;
 }
 
 const SearchPanel: React.FC<SearchPanelProps> = ({ onSearchGuide }) => {
@@ -28,7 +28,7 @@ const SearchPanel: React.FC<SearchPanelProps> = ({ onSearchGuide }) => {
     let value = event.target.value;
 
     if (value.endsWith(",") && value.length > 1 && !/^\d*$/.test(value.slice(0, -1))) {
-      value = value.slice(0, -1); 
+      value = value.slice(0, -1);
     }
 
     if (!/^\d*$/.test(value[value.length - 1]) && value[value.length - 1] !== ",") return;
@@ -38,7 +38,7 @@ const SearchPanel: React.FC<SearchPanelProps> = ({ onSearchGuide }) => {
     }
 
     const groups = value.split(",");
-    const validGroups = groups.map(group => group.slice(0, 11)); 
+    const validGroups = groups.map(group => group.slice(0, 11));
     const updatedValue = validGroups.join(",");
 
     setQuery(updatedValue);
@@ -46,6 +46,40 @@ const SearchPanel: React.FC<SearchPanelProps> = ({ onSearchGuide }) => {
     const guides = updatedValue.split(",").filter((g) => g.length > 0);
     const isInvalid = guides.some((g) => g.length !== 11);
     setError(isInvalid ? "Formato de la guía inválido" : "");
+  };
+
+  const handleSearch = async () => {
+    if (query.length !== 11 || error) {
+      setError("Número de Guía Incompleta o inválida");
+      return;
+    }
+  
+    try {
+      const response = await fetch(`https://apiv2-test.coordinadora.com/cm-consultar-guia-ms/guia/${query}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+  
+      const data = await response.json();
+  
+      if (data.isError) {
+        setError("Error: No se encontró información para este número de guía");
+      } else {
+        setError("");
+        onSearchGuide([data]); // Aquí estamos pasando todos los datos obtenidos
+      }
+    } catch (err) {
+      setError("Error en la conexión con el servidor");
+    }
+  };
+  
+
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Enter") {
+      handleSearch();
+    }
   };
 
   return (
@@ -104,6 +138,7 @@ const SearchPanel: React.FC<SearchPanelProps> = ({ onSearchGuide }) => {
             placeholder="Buscar número de guía..."
             value={query}
             onChange={handleInputChange}
+            onKeyDown={handleKeyDown}
             disabled={activeButton === "etiqueta"}
             style={{
               width: "224px",
@@ -115,6 +150,7 @@ const SearchPanel: React.FC<SearchPanelProps> = ({ onSearchGuide }) => {
               color: "#000000DE",
             }}
           />
+
           {error && <Typography variant="caption" color="error">{error}</Typography>}
           <div style={{ marginTop: "16px" }}>
             <div style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>

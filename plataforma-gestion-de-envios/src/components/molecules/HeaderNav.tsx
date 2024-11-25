@@ -1,9 +1,9 @@
 // src/components/molecules/HeaderNav.tsx
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Logo from '../atoms/logo';
 import SearchBar from '../atoms/SearchBar';
 import NavItem from '../atoms/NavItem';
-import { Typography, Button, IconButton, Menu, MenuItem } from '@mui/material';
+import { Typography } from '@mui/material';
 import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
 import AppBarMenu from './AppBarMenu';
 import RandomUser from '../atoms/RandomUser';

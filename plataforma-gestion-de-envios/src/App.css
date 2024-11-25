@@ -62,3 +62,7 @@ body *{
   flex-direction: column;
 }
 
+.slick-track{
+  display: inline !important;
+}
+
